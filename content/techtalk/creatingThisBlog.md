@@ -145,7 +145,7 @@ This is the content of the **first blog post**.
 ```
 
 8. Let us add the commands for using Github Actions Workflow. 
-Create .github/workflows/deploy.yml
+Create .github/workflows/hugo.yml
 ```
 name: Deploy Hugo site to GitHub Pages
 
@@ -161,6 +161,9 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
+        with:
+          submodules: true
+          fetch-depth: 0
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
@@ -186,6 +189,10 @@ git remote add origin https://github.com/<your-username>/<your-repo-name>.git
 git branch -M main   # or master if you prefer
 git push -u origin main
 ```
+
+Right after this step, enable write access to allow GitHub Actions to push build site into gh-pages branch.
+
+Repo → Settings → Actions → General → Workflow permissions → Read and write permissions select
 
 10. Enable GitHub Pages
 
