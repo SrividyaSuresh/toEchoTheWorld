@@ -1,0 +1,60 @@
+{{ define "main" }}
+<style>
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  padding: 2rem 0;
+}
+
+figure {
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+}
+
+.gallery img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+  filter: brightness(0.8);
+}
+
+figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 0.85rem;
+  font-style: italic;
+  padding: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+figure:hover figcaption {
+  opacity: 1;
+}
+</style>
+
+<h1 style="text-align:center; margin-top:1rem;">{{ .Title }}</h1>
+<p style="text-align:center; color:#555;">{{ .Description }}</p>
+
+<div class="gallery">
+  {{ range .Resources.Match "images/*" }}
+    <figure>
+      <img src="{{ .RelPermalink }}" alt="{{ .Title }}">
+      {{ with .Title }}<figcaption>{{ . }}</figcaption>{{ end }}
+    </figure>
+  {{ end }}
+</div>
+{{ end }}

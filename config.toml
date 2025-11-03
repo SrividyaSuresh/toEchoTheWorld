@@ -27,3 +27,9 @@ publishDir = "public"
   name = "Thoughts"
   url = "/thoughts/"
   weight = 3
+
+  [[menu.main]]
+  identifier = "moments"
+  name = "Moments"
+  url = "/moments/"
+  weight = 4
